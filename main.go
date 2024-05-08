@@ -1,3 +1,7 @@
+/*
+Create an CRUD APP First time using Golang,GIN,GORM,Postgres
+*/
+
 package main
 
 import (
@@ -11,17 +15,20 @@ func init() {
 	initializers.ConnectToDB()
 }
 
-// L4pbrR4rIRn8mFim
+
 func main() {
 	r := gin.Default()
 
-	r.POST("/post", controllers.PostCreate)
+	r.POST("/posts", controllers.PostCreate)
+	r.GET("/posts", controllers.GetAllPost)
+	r.GET("/posts/:id", controllers.GetSinglePost)
+	r.PUT("/posts/:id", controllers.UpdatePost)
+	r.DELETE("/posts/:id", controllers.DeletePost)
 
 	r.GET("/ping", func(context *gin.Context) {
 		context.JSON(200, gin.H{
-			"message": "pong pong",
+			"message": "pong:server is running",
 		})
-
 	})
 	r.Run()
 
